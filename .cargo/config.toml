@@ -1,0 +1,24 @@
+[alias]
+express-gdb = "run --package adafruit-nrf52840-express-bsc --target thumbv7em-none-eabihf"
+
+sense-example-blink = "run --package adafruit-nrf52840-sense-bsc --target thumbv7em-none-eabihf --example blink"
+sense-gdb = "run --package adafruit-nrf52840-sense-bsc --target thumbv7em-none-eabihf"
+
+
+
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = "arm-none-eabi-gdb -q -x nrf52.gdb"
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+#   "-C", "link-arg=-Tdefmt.x",
+]
+
+# [target.'cfg(all(target_arch = "arm", target_os = "none"))']
+# runner = "nrfdfu"
+# rustflags = [
+#     "-C", "link-args=-Tlink.x",
+# #     "-C", "linker=arm-none-eabi-ld",
+# ]
+
+# [build]
+# target = "thumbv7em-none-eabihf"

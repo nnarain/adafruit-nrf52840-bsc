@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "adafruit-nrf52840-sense-bsc",
+    "adafruit-nrf52840-express-bsc"
+]
