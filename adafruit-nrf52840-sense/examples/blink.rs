@@ -3,9 +3,9 @@
 
 use panic_halt as _;
 
-use adafruit_nrf52840_sense_bsc as bsc;
+use adafruit_nrf52840_sense as bsp;
 
-use bsc::{
+use bsp::{
     entry,
     hal::{
         self,
@@ -16,7 +16,7 @@ use bsc::{
 
 #[entry]
 fn main() -> ! {
-    let cp = bsc::core::Peripherals::take().unwrap();
+    let cp = bsp::core::Peripherals::take().unwrap();
     let dp = hal::pac::Peripherals::take().unwrap();
 
     let mut delay = hal::Delay::new(cp.SYST);
