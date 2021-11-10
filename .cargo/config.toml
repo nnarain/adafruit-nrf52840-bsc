@@ -1,6 +1,7 @@
 [alias]
 express-example-blink = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink"
 express-example-blink-button = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink-button"
+express-example-serial = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example serial"
 
 sense-example-blink = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example blink"
 
