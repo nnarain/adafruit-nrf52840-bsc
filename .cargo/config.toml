@@ -1,8 +1,8 @@
 [alias]
-express-gdb = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf"
+express-example-blink = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink"
+express-example-blink-button = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink-button"
 
 sense-example-blink = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example blink"
-sense-gdb = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf"
 
 
 
