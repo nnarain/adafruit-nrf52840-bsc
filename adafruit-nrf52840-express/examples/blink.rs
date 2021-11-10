@@ -13,7 +13,8 @@ use adafruit_nrf52840_express as bsp;
 
 use bsp::{
     entry,
-    hal::{self, prelude::*},
+    prelude::*,
+    hal,
     Pins,
 };
 
