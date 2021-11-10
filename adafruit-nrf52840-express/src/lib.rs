@@ -20,6 +20,7 @@ pub use nb;
 
 pub mod prelude {
     pub use super::hal::prelude::*;
+    pub use adafruit_nrf52840_common::*;
 }
 
 use hal::gpio;

@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "adafruit-nrf52840-common",
     "adafruit-nrf52840-sense",
     "adafruit-nrf52840-express"
 ]
