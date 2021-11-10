@@ -1,5 +1,5 @@
 //
-// blink.rs
+// serial.rs
 //
 // @author Natesh Narain <nnaraindev@gmail.com>
 // @date Nov 09 2021
@@ -13,7 +13,8 @@ use adafruit_nrf52840_express as bsp;
 
 use bsp::{
     entry,
-    hal::{self, prelude::*},
+    prelude::*,
+    hal,
     Pins,
 };
 
