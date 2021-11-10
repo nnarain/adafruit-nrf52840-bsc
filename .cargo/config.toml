@@ -4,10 +4,8 @@ express-example-blink-button = "run --package adafruit-nrf52840-express --target
 
 sense-example-blink = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example blink"
 
-
-
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
-runner = "arm-none-eabi-gdb -q -x nrf52.gdb"
+runner = "gdb -q -x nrf52.gdb"
 rustflags = [
   "-C", "link-arg=-Tlink.x",
 ]
