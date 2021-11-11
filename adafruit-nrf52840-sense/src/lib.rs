@@ -29,4 +29,5 @@ pub use pins::Pins;
 
 pub mod sensors {
     pub use bmp280_ehal as bmp280;
+    pub use apds9960;
 }
