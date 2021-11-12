@@ -1,0 +1,24 @@
+cargo-features = ["per-package-target"]
+
+[package]
+name = "adafruit-nrf52840-examples"
+version = "0.1.0"
+edition = "2018"
+forced-target = "thumbv7em-none-eabihf"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+panic-halt = "0.2"
+
+[dependencies.adafruit-nrf52840-express]
+path = "../adafruit-nrf52840-express"
+optional = true
+
+[dependencies.adafruit-nrf52840-sense]
+path = "../adafruit-nrf52840-sense"
+optional = true
+
+[features]
+express = ["adafruit-nrf52840-express"]
+sense = ["adafruit-nrf52840-sense"]

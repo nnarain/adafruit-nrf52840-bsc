@@ -9,7 +9,11 @@
 
 use panic_halt as _;
 
+#[cfg(feature = "express")]
 use adafruit_nrf52840_express as bsp;
+
+#[cfg(feature = "sense")]
+use adafruit_nrf52840_sense as bsp;
 
 use bsp::{
     entry,
@@ -27,7 +31,11 @@ fn main() -> ! {
 
     let pins = Pins::new(dp.P0, dp.P1);
 
+    #[cfg(feature = "express")]
     let mut led1 = pins.led;
+    #[cfg(feature = "sense")]
+    let mut led1 = pins.d13.into_push_pull_output(hal::gpio::Level::Low);
+
     let mut led2 = pins.blue_led;
 
     led2.set_high().unwrap();
