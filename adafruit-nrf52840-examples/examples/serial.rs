@@ -2,13 +2,17 @@
 // serial.rs
 //
 // @author Natesh Narain <nnaraindev@gmail.com>
-// @date Nov 10 2021
+// @date Nov 11 2021
 //
 #![no_std]
 #![no_main]
 
 use panic_halt as _;
 
+#[cfg(feature = "express")]
+use adafruit_nrf52840_express as bsp;
+
+#[cfg(feature = "sense")]
 use adafruit_nrf52840_sense as bsp;
 
 use bsp::{
@@ -40,7 +44,10 @@ fn main() -> ! {
     );
 
     loop {
-        write!(uart, "Hello World!\r\n").unwrap();
+        #[cfg(feature = "express")]
+        write!(uart, "Hello Express!\r\n").unwrap();
+        #[cfg(feature = "sense")]
+        write!(uart, "Hello Sense!\r\n").unwrap();
         delay.delay_ms(1000u16);
     }
 }
