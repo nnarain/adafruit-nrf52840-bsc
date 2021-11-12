@@ -7,8 +7,6 @@
 #![no_std]
 #![no_main]
 
-use panic_halt as _;
-
 use adafruit_nrf52840_sense as bsp;
 
 use bsp::{
@@ -61,5 +59,12 @@ fn main() -> ! {
         let temperature = bmp.temp();
 
         write!(uart, "Pressure: {}, Temperature: {}\r\n", pressure, temperature).unwrap();
+    }
+}
+
+#[panic_handler]
+fn panic(_: &core::panic::PanicInfo) -> ! {
+    loop {
+        cortex_m::asm::bkpt();
     }
 }
