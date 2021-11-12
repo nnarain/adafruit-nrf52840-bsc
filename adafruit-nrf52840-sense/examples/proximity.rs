@@ -8,7 +8,6 @@
 #![no_main]
 
 use nb::block;
-use panic_halt as _;
 
 use adafruit_nrf52840_sense as bsp;
 
@@ -64,5 +63,12 @@ fn main() -> ! {
         let prox = block!(sensor.read_proximity()).unwrap();
         let light = block!(sensor.read_light()).unwrap();
         write!(uart, "Proximity: {}, Light: {:?}\r\n", prox, light).unwrap();
+    }
+}
+
+#[panic_handler]
+fn panic(_: &core::panic::PanicInfo) -> ! {
+    loop {
+        cortex_m::asm::bkpt();
     }
 }

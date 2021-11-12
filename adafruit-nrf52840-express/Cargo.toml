@@ -10,7 +10,6 @@ forced-target = "thumbv7em-none-eabihf"
 cortex-m = "0.6"
 cortex-m-rt = "0.6"
 nrf52840-hal = "0.14"
-panic-halt = "0.2"
 nb = "1.0.0"
 
 adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
