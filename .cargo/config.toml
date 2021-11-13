@@ -1,14 +1,3 @@
-[alias]
-express-example-blink = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink"
-express-example-blink-button = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example blink-button"
-express-example-serial = "run --package adafruit-nrf52840-express --target thumbv7em-none-eabihf --example serial"
-
-sense-example-blink = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example blink"
-sense-example-blink-button = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example blink-button"
-sense-example-serial = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example serial"
-sense-example-barometer = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example barometer"
-sense-example-proximity = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example proximity"
-sense-example-magnetometer = "run --package adafruit-nrf52840-sense --target thumbv7em-none-eabihf --example magnetometer"
 
 [target.'cfg(all(target_arch = "arm", target_os = "none"))']
 runner = "gdb -q -x nrf52.gdb"

@@ -28,6 +28,7 @@ pub mod prelude {
 pub use pins::Pins;
 
 pub mod sensors {
+    pub use lsm6ds33;
     pub use bmp280_ehal as bmp280;
     pub use apds9960;
     pub use lis3mdl;
