@@ -15,8 +15,10 @@ nb = "1.0.0"
 adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
 
 bmp280-ehal = {git = "https://github.com/nnarain/bmp280.git", branch = "fix-configure-address"}
-apds9960 = "0.1.0"
 lis3mdl = {git = "https://github.com/nnarain/lis3mdl.git", branch = "fix-config-address"}
+lsm6ds33 = {git = "https://github.com/nnarain/lsm6ds33.git", branch = "develop"}
+apds9960 = "0.1.0"
+
 
 [dependencies.embedded-hal]
 version = "0.2"
