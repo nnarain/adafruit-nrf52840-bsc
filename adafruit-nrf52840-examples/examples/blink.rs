@@ -1,5 +1,5 @@
 //
-// serial.rs
+// blink.rs
 //
 // @author Natesh Narain <nnaraindev@gmail.com>
 // @date Nov 09 2021
