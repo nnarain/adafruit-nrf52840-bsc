@@ -11,6 +11,7 @@ cortex-m = "0.6"
 cortex-m-rt = "0.6"
 nrf52840-hal = "0.14"
 nb = "1.0.0"
+shared-bus = "0.2.2"
 
 adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
 

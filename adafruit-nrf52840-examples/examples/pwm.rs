@@ -19,31 +19,28 @@ use bsp::{
     entry,
     prelude::*,
     hal::{
-        self,
         gpio,
-        pwm::{Pwm, Channel},
+        pwm::Channel,
         timer::{self, Timer},
     },
-    Pins,
+    Board,
     nb::block,
 };
 
 #[entry]
 fn main() -> ! {
-    let dp = hal::pac::Peripherals::take().unwrap();
+    let board = Board::new().unwrap();
 
-    let pins = Pins::new(dp.P0, dp.P1);
-
-    let mut timer = Timer::new(dp.TIMER0);
+    let mut timer = board.timer0;
 
     #[cfg(feature = "express")]
-    let led1 = pins.led;
+    let led1 = board.led;
     #[cfg(feature = "sense")]
-    let led1 = pins.d13.into_push_pull_output(gpio::Level::Low);
+    let led1 = board.d13.into_push_pull_output(gpio::Level::Low);
 
-    let led2 = pins.blue_led;
+    let led2 = board.blue_led;
 
-    let pwm = Pwm::new(dp.PWM0);
+    let pwm = board.pwm0;
     pwm.set_period(500u32.hz());
     pwm.set_output_pin(Channel::C0, led1.degrade());
     pwm.set_output_pin(Channel::C1, led2.degrade());

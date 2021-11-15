@@ -18,25 +18,22 @@ use adafruit_nrf52840_sense as bsp;
 use bsp::{
     entry,
     prelude::*,
-    hal,
-    Pins,
+    hal::gpio,
+    Board,
 };
 
 #[entry]
 fn main() -> ! {
-    let cp = bsp::core::Peripherals::take().unwrap();
-    let dp = bsp::hal::pac::Peripherals::take().unwrap();
+    let board = Board::new().unwrap();
 
-    let mut delay = hal::Delay::new(cp.SYST);
-
-    let pins = Pins::new(dp.P0, dp.P1);
+    let mut delay = board.delay;
 
     #[cfg(feature = "express")]
-    let mut led1 = pins.led;
+    let mut led1 = board.led;
     #[cfg(feature = "sense")]
-    let mut led1 = pins.d13.into_push_pull_output(hal::gpio::Level::Low);
+    let mut led1 = board.d13.into_push_pull_output(gpio::Level::Low);
 
-    let mut led2 = pins.blue_led;
+    let mut led2 = board.blue_led;
 
     led2.set_high().unwrap();
 
