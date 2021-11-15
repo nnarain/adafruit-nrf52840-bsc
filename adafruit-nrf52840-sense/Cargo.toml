@@ -13,7 +13,7 @@ nrf52840-hal = "0.14"
 nb = "1.0.0"
 shared-bus = "0.2.2"
 
-adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
+# adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
 
 bmp280-ehal = {git = "https://github.com/nnarain/bmp280.git", branch = "fix-configure-address"}
 lis3mdl = {git = "https://github.com/nnarain/lis3mdl.git", branch = "fix-config-address"}

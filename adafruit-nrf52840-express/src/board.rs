@@ -10,7 +10,7 @@ use crate::{
         pac,
         gpio,
         Delay,
-        Uarte, uarte::{Baudrate, Parity},
+        Uarte, uarte::{self, Baudrate, Parity},
         twim, Twim,
         pwm::Pwm,
         timer::{Timer, OneShot},
@@ -109,12 +109,16 @@ impl Board {
             let nfc1 = p0.p0_09;
             let vlt_mnt = p0.p0_29;
 
-            let serial = adafruit_nrf52840_common::serial::init(
-                dp.UARTE0,
-                rx, tx,
-                Baudrate::BAUD115200,
-                Parity::EXCLUDED
-            );
+            // Serial port
+            let rx = rx.into_floating_input().degrade();
+            let tx = tx.into_push_pull_output(gpio::Level::High).degrade();
+            let uart_pins = uarte::Pins {
+                rxd: rx,
+                txd: tx,
+                cts: None,
+                rts: None
+            };
+            let serial = Uarte::new(dp.UARTE0, uart_pins, Parity::EXCLUDED, Baudrate::BAUD115200);
 
             let twim_pins = twim::Pins{
                 scl: scl.into_floating_input().degrade(),
