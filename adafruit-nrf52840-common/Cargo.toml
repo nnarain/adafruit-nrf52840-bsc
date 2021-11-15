@@ -5,6 +5,7 @@ name = "adafruit-nrf52840-common"
 version = "0.1.0"
 edition = "2018"
 forced-target = "thumbv7em-none-eabihf"
+publish = false
 
 [dependencies]
 nrf52840-hal = "0.14"
