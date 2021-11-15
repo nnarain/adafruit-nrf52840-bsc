@@ -18,36 +18,22 @@ use adafruit_nrf52840_sense as bsp;
 use bsp::{
     entry,
     prelude::*,
-    hal::{
-        Delay,
-        uarte::{Parity, Baudrate}
-    },
-    Pins,
+    Board,
 };
 use core::fmt::Write;
 
 #[entry]
 fn main() -> ! {
-    let cp = bsp::core::Peripherals::take().unwrap();
-    let dp = bsp::hal::pac::Peripherals::take().unwrap();
+    let board = Board::new().unwrap();
 
-    let mut delay = Delay::new(cp.SYST);
-
-    let pins = Pins::new(dp.P0, dp.P1);
-
-    let mut uart = serial::init(
-        dp.UARTE0,
-        pins.rx,
-        pins.tx,
-        Baudrate::BAUD115200,
-        Parity::EXCLUDED
-    );
+    let mut delay = board.delay;
+    let mut serial = board.serial;
 
     loop {
         #[cfg(feature = "express")]
-        write!(uart, "Hello Express!\r\n").unwrap();
+        write!(serial, "Hello Express!\r\n").unwrap();
         #[cfg(feature = "sense")]
-        write!(uart, "Hello Sense!\r\n").unwrap();
+        write!(serial, "Hello Sense!\r\n").unwrap();
         delay.delay_ms(1000u16);
     }
 }

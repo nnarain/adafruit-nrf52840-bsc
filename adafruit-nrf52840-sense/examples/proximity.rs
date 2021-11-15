@@ -14,41 +14,22 @@ use adafruit_nrf52840_sense as bsp;
 use bsp::{
     entry,
     prelude::*,
-    hal::{
-        self,
-        twim::{self, Twim},
-        uarte::{Baudrate, Parity},
-    },
-    Pins,
+    hal::gpio,
+    Board,
     sensors::apds9960::Apds9960,
 };
 use core::fmt::Write;
 
 #[entry]
 fn main() -> ! {
-    let cp = bsp::core::Peripherals::take().unwrap();
-    let dp = hal::pac::Peripherals::take().unwrap();
+    let board = Board::new().unwrap();
 
-    let mut delay = hal::Delay::new(cp.SYST);
+    let mut delay = board.delay;
+    let mut led = board.d13.into_push_pull_output(gpio::Level::Low);
+    let mut serial = board.serial;
+    let i2c = board.i2c;
 
-    let pins = Pins::new(dp.P0, dp.P1);
-    let mut led = pins.d13.into_push_pull_output(hal::gpio::Level::Low);
-
-    let mut uart = serial::init(
-        dp.UARTE0,
-        pins.rx,
-        pins.tx,
-        Baudrate::BAUD115200,
-        Parity::EXCLUDED
-    );
-
-    let twim_pins = twim::Pins{
-        scl: pins.scl.into_floating_input().degrade(),
-        sda: pins.sda.into_floating_input().degrade()
-    };
-    let i2c = Twim::new(dp.TWIM0, twim_pins, twim::Frequency::K400);
-
-    let mut sensor = Apds9960::new(i2c);
+    let mut sensor = Apds9960::new(i2c.acquire_i2c());
     sensor.enable().unwrap();
     sensor.enable_proximity().unwrap();
     sensor.enable_light().unwrap();
@@ -62,7 +43,7 @@ fn main() -> ! {
 
         let prox = block!(sensor.read_proximity()).unwrap();
         let light = block!(sensor.read_light()).unwrap();
-        write!(uart, "Proximity: {}, Light: {:?}\r\n", prox, light).unwrap();
+        write!(serial, "Proximity: {}, Light: {:?}\r\n", prox, light).unwrap();
     }
 }
 

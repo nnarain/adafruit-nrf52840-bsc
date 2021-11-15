@@ -5,8 +5,7 @@
 // @date Nov 10 2021
 //
 #![no_std]
-
-mod pins;
+mod board;
 
 // Re-exports
 pub use nrf52840_hal as hal;
@@ -22,10 +21,9 @@ pub use nb;
 
 pub mod prelude {
     pub use super::hal::prelude::*;
-    pub use adafruit_nrf52840_common::*;
 }
 
-pub use pins::Pins;
+pub use board::Board;
 
 pub mod sensors {
     pub use lsm6ds33;

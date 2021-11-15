@@ -17,22 +17,21 @@ use adafruit_nrf52840_sense as bsp;
 
 use bsp::{
     entry,
-    hal::{self, prelude::*},
-    Pins,
+    prelude::*,
+    hal::gpio,
+    Board,
 };
 
 #[entry]
 fn main() -> ! {
-    let dp = bsp::hal::pac::Peripherals::take().unwrap();
+    let board = Board::new().unwrap();
 
-    let pins = Pins::new(dp.P0, dp.P1);
-
-    let button = pins.switch;
+    let button = board.switch;
 
     #[cfg(feature = "express")]
-    let mut led = pins.led;
+    let mut led = board.led;
     #[cfg(feature = "sense")]
-    let mut led = pins.d13.into_push_pull_output(hal::gpio::Level::Low);
+    let mut led = board.d13.into_push_pull_output(gpio::Level::Low);
 
     loop {
         if button.is_low().unwrap() {
