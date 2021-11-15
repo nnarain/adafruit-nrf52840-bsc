@@ -18,8 +18,6 @@ use crate::{
     // Pins
 };
 
-use adafruit_nrf52840_common;
-
 use shared_bus::BusManagerSimple;
 
 #[derive(Debug)]
