@@ -5,6 +5,10 @@ name = "adafruit-nrf52840-express"
 version = "0.1.0"
 edition = "2018"
 forced-target = "thumbv7em-none-eabihf"
+description = "Board support crate for Adafruit's nRF52840 Express board"
+license = "MIT"
+license-file = "../LICENSE"
+readme = "../README.md"
 
 [dependencies]
 cortex-m = "0.6"

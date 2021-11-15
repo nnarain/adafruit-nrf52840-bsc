@@ -5,6 +5,10 @@ name = "adafruit-nrf52840-sense"
 version = "0.1.0"
 edition = "2018"
 forced-target = "thumbv7em-none-eabihf"
+description = "Board support crate for Adafruit's nRF52840 Sense board"
+license = "MIT"
+license-file = "../LICENSE"
+readme = "../README.md"
 
 [dependencies]
 cortex-m = "0.6"
@@ -15,8 +19,8 @@ shared-bus = "0.2.2"
 
 # adafruit-nrf52840-common = {path="../adafruit-nrf52840-common"}
 
-bmp280-ehal = {git = "https://github.com/nnarain/bmp280.git", branch = "fix-configure-address"}
-lis3mdl = {git = "https://github.com/nnarain/lis3mdl.git", branch = "fix-config-address"}
+bmp280-ehal = {git = "https://github.com/nnarain/bmp280.git", branch = "fix-configure-address", version = "0.0.6-alpha.0"}
+lis3mdl = {git = "https://github.com/nnarain/lis3mdl.git", branch = "fix-config-address", version = "0.1.0"}
 lsm6ds33 = "0.1.0"
 apds9960 = "0.1.0"
 
