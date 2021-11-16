@@ -2,10 +2,10 @@
 
 Board support crates for Adafruit's nRF52840 based boards.
 
-| Board   | Info Page                                                            | crates.io  |
-| ------- | -------------------------------------------------------------------- | ---------- |
-| Sense   | https://learn.adafruit.com/adafruit-feather-sense                    | [![express crate](https://img.shields.io/crates/v/adafruit-nrf52840-express.svg)](https://crates.io/crates/adafruit-nrf52840-express) |
-| Express | https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather | [![sense crate](https://img.shields.io/crates/v/adafruit-nrf52840-sense.svg)](https://crates.io/crates/adafruit-nrf52840-sense) |
+| Board   | Info Page                                                            | crates.io                                                                                                                             |
+| ------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Sense   | https://learn.adafruit.com/adafruit-feather-sense                    | [![sense crate](https://img.shields.io/crates/v/adafruit-nrf52840-sense.svg)](https://crates.io/crates/adafruit-nrf52840-sense)       |
+| Express | https://learn.adafruit.com/introducing-the-adafruit-nrf52840-feather | [![express crate](https://img.shields.io/crates/v/adafruit-nrf52840-express.svg)](https://crates.io/crates/adafruit-nrf52840-express) |
 
 Simple example:
 
