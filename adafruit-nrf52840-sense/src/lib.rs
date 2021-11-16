@@ -27,7 +27,7 @@ pub use board::Board;
 
 pub mod sensors {
     pub use lsm6ds33;
-    pub use bmp280_ehal as bmp280;
+    pub use bmp280_driver as bmp280;
     pub use apds9960;
-    pub use lis3mdl;
+    pub use lis3mdl_driver as lis3mdl;
 }
