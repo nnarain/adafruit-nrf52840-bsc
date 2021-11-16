@@ -6,7 +6,3 @@ members = [
 
     "adafruit-nrf52840-examples"
 ]
-
-[patch.crates-io]
-bmp280-ehal = {git = "https://github.com/nnarain/bmp280.git", branch = "fix-configure-address"}
-lis3mdl = {git = "https://github.com/nnarain/lis3mdl.git", branch = "fix-config-address"}
