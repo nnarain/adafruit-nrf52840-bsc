@@ -4,5 +4,12 @@ members = [
     "adafruit-nrf52840-sense",
     "adafruit-nrf52840-express",
 
-    "adafruit-nrf52840-examples"
+    "adafruit-nrf52840-examples",
+
+    # External packages for development
+    # These are locally patched
+    "external/*"
 ]
+
+[patch.crates-io]
+lsm6ds33 = {path = "external/lsm6ds33"}

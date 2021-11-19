@@ -1,0 +1,3 @@
+[submodule "external/lsm6ds33"]
+	path = external/lsm6ds33
+	url = https://github.com/nnarain/lsm6ds33.git
