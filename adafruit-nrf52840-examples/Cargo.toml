@@ -2,7 +2,7 @@ cargo-features = ["per-package-target"]
 
 [package]
 name = "adafruit-nrf52840-examples"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2018"
 forced-target = "thumbv7em-none-eabihf"
 publish = false
