@@ -14,7 +14,7 @@ use bsp::{
     prelude::*,
     hal::gpio,
     Board,
-    sensors::lsm6ds33::{Lsm6ds33, AccelerometerOutput, GyroscopeOutput},
+    sensors::lsm6ds33::{Lsm6ds33, AccelerometerOutput, GyroscopeOutput, GyroscopeFullScale},
 };
 use core::fmt::Write;
 
@@ -30,6 +30,7 @@ fn main() -> ! {
     let mut imu = Lsm6ds33::new(i2c.acquire_i2c(), 0x6A).unwrap();
     imu.set_accelerometer_output(AccelerometerOutput::Rate6_66k).unwrap();
     imu.set_gyroscope_output(GyroscopeOutput::Rate6_66k).unwrap();
+    imu.set_gyroscope_scale(GyroscopeFullScale::Dps2000).unwrap();
 
     loop {
         // Blink light to show activity
@@ -40,7 +41,7 @@ fn main() -> ! {
 
         if let Ok(available) = imu.accel_data_available() {
             if available {
-                let (x, y, z) = imu.read_accel().unwrap();
+                let (x, y, z) = imu.read_accelerometer().unwrap();
                 write!(serial, "Accel[{}, {}, {}]\r\n", x, y, z).unwrap();
             }
         }
