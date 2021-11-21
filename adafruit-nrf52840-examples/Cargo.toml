@@ -9,6 +9,8 @@ publish = false
 
 [dependencies]
 panic-halt = "0.2"
+ahrs = {version = "0.4", default-features = false}
+nalgebra = {version = "0.21", default-features = false}
 
 [dependencies.adafruit-nrf52840-express]
 path = "../adafruit-nrf52840-express"
