@@ -14,15 +14,11 @@ use crate::{
         twim, Twim,
         pwm::Pwm,
         timer::{Timer, OneShot}
-    }
+    },
+    Error,
 };
 
 use shared_bus::BusManagerSimple;
-
-#[derive(Debug)]
-pub enum Error {
-    HardwareInitializationFailed,
-}
 
 pub struct Board {
     pub aref: gpio::p0::P0_31<gpio::Disconnected>,
@@ -65,6 +61,10 @@ pub struct Board {
     pub pwm3: Pwm<pac::PWM3>,
 
     pub timer0: Timer<pac::TIMER0, OneShot>,
+
+    // pub imu: Lsm6ds33<I2cProxy<'a, NullMutex<Twim<pac::TWIM0>>>>,
+    // pub magnetometer: Lis3mdl<I2cProxy<'a, NullMutex<Twim<pac::TWIM0>>>>,
+    // pub barometer: BMP280<I2cProxy<'a, NullMutex<Twim<pac::TWIM0>>>>,
 }
 
 impl Board {

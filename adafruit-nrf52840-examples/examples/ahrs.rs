@@ -11,7 +11,17 @@ use panic_halt as _;
 
 use adafruit_nrf52840_sense as bsp;
 
-use bsp::{Board, entry, hal::gpio, prelude::*, sensors::lsm6ds33::{AccelerometerOutput, AccelerometerScale, GyroscopeFullScale, GyroscopeOutput, Lsm6ds33}};
+use bsp::{
+    entry,
+    prelude::*,
+    Board,
+    hal::gpio,
+    sensors::imu::{
+        self,
+        AccelerometerOutput, AccelerometerScale,
+        GyroscopeOutput, GyroscopeFullScale,
+    }
+};
 
 use core::fmt::Write;
 
@@ -27,7 +37,7 @@ fn main() -> ! {
     let mut serial = board.serial;
     let i2c = board.i2c;
 
-    let mut imu = Lsm6ds33::new(i2c.acquire_i2c(), 0x6A).unwrap();
+    let mut imu = imu::init(i2c.acquire_i2c()).unwrap();
     imu.set_accelerometer_output(AccelerometerOutput::Rate104).unwrap();
     imu.set_accelerometer_scale(AccelerometerScale::G04).unwrap();
     imu.set_gyroscope_output(GyroscopeOutput::Rate104).unwrap();

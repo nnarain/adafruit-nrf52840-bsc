@@ -25,9 +25,55 @@ pub mod prelude {
 
 pub use board::Board;
 
+#[derive(Debug)]
+pub enum Error {
+    HardwareInitializationFailed,
+}
+
 pub mod sensors {
-    pub use lsm6ds33;
     pub use bmp280_driver as bmp280;
     pub use apds9960;
     pub use lis3mdl_driver as lis3mdl;
+
+    use crate::hal::{self, Twim};
+    use shared_bus::{I2cProxy, NullMutex};
+
+    type I2C<'a> = I2cProxy<'a, NullMutex<Twim<hal::pac::TWIM0>>>;
+
+    pub mod imu {
+        use super::*;
+        use crate::Error;
+
+        use lsm6ds33::Lsm6ds33;
+        pub use lsm6ds33::{
+            AccelerometerBandwidth, AccelerometerOutput, AccelerometerScale,
+            GyroscopeFullScale, GyroscopeOutput
+        };
+
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<Lsm6ds33<I2C<'a>>, Error> {
+            Lsm6ds33::new(i2c, 0x6A).map_err(|_| Error::HardwareInitializationFailed)
+        }
+    }
+
+    pub mod magnetometer {
+        use super::*;
+        use crate::Error;
+
+        use lis3mdl::{Lis3mdl, Address};
+
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<Lis3mdl<I2C<'a>>, Error> {
+            Lis3mdl::new(i2c, Address::Addr1C).map_err(|_| Error::HardwareInitializationFailed)
+        }
+    }
+
+    pub mod barometer {
+        use super::*;
+        use crate::Error;
+
+        use bmp280::BMP280;
+
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<BMP280<I2C<'a>>, Error> {
+            BMP280::new(i2c, 0x77).map_err(|_| Error::HardwareInitializationFailed)
+        }
+    }
 }
