@@ -14,7 +14,10 @@ use bsp::{
     prelude::*,
     hal::gpio,
     Board,
-    sensors::lsm6ds33::{Lsm6ds33, AccelerometerOutput, GyroscopeOutput, GyroscopeFullScale},
+    sensors::imu::{
+        self,
+        AccelerometerOutput, GyroscopeOutput, GyroscopeFullScale
+    },
 };
 use core::fmt::Write;
 
@@ -27,7 +30,7 @@ fn main() -> ! {
     let mut serial = board.serial;
     let i2c = board.i2c;
 
-    let mut imu = Lsm6ds33::new(i2c.acquire_i2c(), 0x6A).unwrap();
+    let mut imu = imu::init(i2c.acquire_i2c()).unwrap();
     imu.set_accelerometer_output(AccelerometerOutput::Rate6_66k).unwrap();
     imu.set_gyroscope_output(GyroscopeOutput::Rate6_66k).unwrap();
     imu.set_gyroscope_scale(GyroscopeFullScale::Dps2000).unwrap();

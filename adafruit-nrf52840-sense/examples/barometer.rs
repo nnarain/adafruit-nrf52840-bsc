@@ -14,7 +14,7 @@ use bsp::{
     prelude::*,
     hal::gpio,
     Board,
-    sensors::bmp280::BMP280,
+    sensors::barometer,
 };
 use core::fmt::Write;
 
@@ -27,7 +27,7 @@ fn main() -> ! {
     let mut serial = board.serial;
     let i2c = board.i2c;
 
-    let mut bmp = BMP280::new(i2c.acquire_i2c(), 0x77).unwrap();
+    let mut bmp = barometer::init(i2c.acquire_i2c()).unwrap();
 
     loop {
         // Blink light to show activity
