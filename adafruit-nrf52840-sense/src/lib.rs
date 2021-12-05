@@ -45,12 +45,16 @@ pub mod sensors {
         use crate::Error;
 
         use lsm6ds33::Lsm6ds33;
+
+        pub type Imu<'a> = Lsm6ds33<I2C<'a>>;
+        pub type ImuError = lsm6ds33::Error<crate::hal::twim::Error>;
+
         pub use lsm6ds33::{
             AccelerometerBandwidth, AccelerometerOutput, AccelerometerScale,
             GyroscopeFullScale, GyroscopeOutput
         };
 
-        pub fn init<'a>(i2c: I2C<'a>) -> Result<Lsm6ds33<I2C<'a>>, Error> {
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<Imu<'a>, Error> {
             Lsm6ds33::new(i2c, 0x6A).map_err(|_| Error::HardwareInitializationFailed)
         }
     }
@@ -61,7 +65,10 @@ pub mod sensors {
 
         use lis3mdl::{Lis3mdl, Address};
 
-        pub fn init<'a>(i2c: I2C<'a>) -> Result<Lis3mdl<I2C<'a>>, Error> {
+        pub type Magnetometer<'a> = Lis3mdl<I2C<'a>>;
+        pub use lis3mdl::Error as MagnetometerError;
+
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<Magnetometer<'a>, Error> {
             Lis3mdl::new(i2c, Address::Addr1C).map_err(|_| Error::HardwareInitializationFailed)
         }
     }
@@ -72,7 +79,9 @@ pub mod sensors {
 
         use bmp280::BMP280;
 
-        pub fn init<'a>(i2c: I2C<'a>) -> Result<BMP280<I2C<'a>>, Error> {
+        pub type Barometer<'a> = BMP280<I2C<'a>>;
+
+        pub fn init<'a>(i2c: I2C<'a>) -> Result<Barometer<'a>, Error> {
             BMP280::new(i2c, 0x77).map_err(|_| Error::HardwareInitializationFailed)
         }
     }
